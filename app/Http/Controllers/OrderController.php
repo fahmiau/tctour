@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 use App\TicketDetail;
 use App\TicketOrder;
 use App\Order;
@@ -11,11 +13,14 @@ class OrderController extends Controller
 {
     public function cariTiket(Request $request)
     {
-        $ticketDetails=TicketDetail::join('depCity','ticketDetails.depCity','=','$request.depCity')
-                        ->join('arrCity','ticketDetails.arrCity','=','$request.arrCity')
-                        ->join('pergi','ticketDetails.pergi','=','$request.pergi')
-                        ->join('pulang','ticketDetails.pulang','=','$request.pulang')
+        $ticketDetails = TicketDetail::where('depCity',$request->depCity,
+                                            'arrCity',$request->arrcity,
+                                            'pergi',$request->pergi,
+                                            'pulang',$request->pulang,
+                                            'seatClass',$request->seatClass)
+                                            ->get();
 
-        return $request;
+        // dd($ticketDetails);
+        return view('order.showTicket',['ticketDetails'=>$ticketDetails]);
     }
 }

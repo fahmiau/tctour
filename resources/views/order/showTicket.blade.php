@@ -18,18 +18,20 @@
           <th>Price</th>
         </thead>
         <tbody>
+          @foreach ($ticketDetails as $ticketDetail)              
           <tr>
-            <td>1</td>
-            <td>bandung</td>
-            <td>jakarta</td>
-            <td>maret</td>
-            <td>april</td>
-            <td>ekonimi</td>
+            <td>{{$loop->iteration}}</td>
+            <td>{{$ticketDetail->depCity}}</td>
+            <td>{{$ticketDetail->arrCity}}</td>
+            <td>{{$ticketDetail->pergi}}</td>
+            <td>{{$ticketDetail->pulang}}</td>
+            <td>{{$ticketDetail->seatClass}}</td>
             <td>
-              200000&nbsp;&nbsp;&nbsp;&nbsp;
+              {{$ticketDetail->price}}&nbsp;&nbsp;&nbsp;&nbsp;
               <button class="btn waves-effect waves-light blue" type="submit">Beli Tiket</button>
             </td>
           </tr>
+          @endforeach
         </tbody>
       </table>
     </div>
